@@ -2,6 +2,8 @@ import random
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
+import pandas as pd
+import numpy as np
 
 class LearningAgent(Agent):
     """An agent that learns to drive in the smartcab world."""
@@ -13,7 +15,6 @@ class LearningAgent(Agent):
         # TODO: Initialize any additional variables here
         
         #Set traffic_light and movement
-        
         traffic_light=["red","green"]
         motion = [None, 'forward', 'left', 'right']
         waypoint,oncoming,left=motion,motion,motion
@@ -30,15 +31,17 @@ class LearningAgent(Agent):
 
         print self.q_table
 
+
+        self.episode=0
+        self.preserve=[]
+        self.failure=0
+
     def reset(self,destination=None,total=0):
 
         self.planner.route_to(destination)
         # TODO: Prepare for a new trip; reset any variables here, if required
         self.total_reward=total
 
-
-
-        
         
     def update(self, t):
         # Gather inputs
@@ -47,6 +50,13 @@ class LearningAgent(Agent):
         deadline = self.env.get_deadline(self)
         
         
+        old_time=t
+        print 'Old_TIME',old_time
+
+       
+
+
+
         # TODO: Update state
         self.state = (inputs['light'],
                       self.next_waypoint,
@@ -67,7 +77,7 @@ class LearningAgent(Agent):
             if max(self.q_table[self.state].values())==0:
                 action=random.choice(Environment.valid_actions[0:])
                 print self.q_table[self.state]
-                print action
+               
             else:
                 action = max(self.q_table[self.state],
                      key=self.q_table[self.state].get)
@@ -110,25 +120,63 @@ class LearningAgent(Agent):
         self.q_table[self.state][action] = q_value
         # Set current state and action as previous state and action
         
+        
         print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
+        new_time=t
+        print 'New_time',new_time
+        total_preserve=self.total_reward
         print "\n"
         print "\n"
+
+
+
+        if old_time==0:
+            self.episode+=1
+            
+
+        self.preserve.append([new_time,self.total_reward,deadline,self.episode])
+      #  self.preserve.append(new_time)
+      #  self.preserve.append(self.total_reward)
+      #  self.preserve.append(self.episode)
+    
+    
+    
+    
+    
+
+
+        if deadline==0:
+            self.failure+=1
+            print self.failure
+        
+        
+       
+        
+        if self.episode==100:
+            df1=pd.DataFrame(self.preserve,columns=['Time','Reward','Deadline','Episode'])
+          #  print self.preserve
+          #  print df1
+            df1.to_csv('report.csv')
+          #  return df1
+       
+        
     
 def run():
     """Run the agent for a finite number of trials."""
     # Set up environment and agent
     e = Environment()  # create environment (also adds some dummy traffic)
     a = e.create_agent(LearningAgent)  # create agent
-    
     e.set_primary_agent(a, enforce_deadline=True)  # set agent to track
     # Now simulate it
-    sim = Simulator(e, update_delay=1,display=True)  # reduce update_delay to speed up simulation
-    sim.run(n_trials=10)  # press Esc or close pygame window to quit
-    print 'TRIALTRIALTRIALTRIAL'trial
+    sim = Simulator(e, update_delay=0.001,display=True)  # reduce update_delay to speed up simulation
+    sim.run(n_trials=100)  # press Esc or close pygame window to quit
+
+
 
 
     
 
 if __name__ == '__main__':
     run()
+    
     
