@@ -69,6 +69,7 @@ class LearningAgent(Agent):
         
         # TODO: Select action according to your policy
         epsilon=0.1
+        #epsilon=1.0
         rand=random.random()
         if rand<epsilon:
             action=random.choice(Environment.valid_actions[0:])
@@ -96,8 +97,8 @@ class LearningAgent(Agent):
         # Set the tuning parameters
         alpha = 1.0/(1.0+t) # learning rate
         gamma = 1.0/(1.0+deadline) # discount factor
-      #  alpha=0.5
-       # gamma=0.2
+        #alpha=0.5
+        #gamma=0.2
         # Get the new state after the above action
 
         inputs_new = self.env.sense(self)
@@ -153,10 +154,12 @@ class LearningAgent(Agent):
        
         
         if self.episode==100:
-            df1=pd.DataFrame(self.preserve,columns=['Time','Reward','Deadline','Episode'])
+            df=pd.DataFrame(self.preserve,columns=['Time','Reward','Deadline','Episode'])
           #  print self.preserve
-          #  print df1
-            df1.to_csv('report.csv')
+          #  print df
+            df.to_csv('better.csv')
+           # df.to_csv('random.csv')
+            #df.to_csv('constant.csv')
           #  return df1
        
         

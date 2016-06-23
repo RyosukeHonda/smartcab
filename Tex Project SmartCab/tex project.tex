@@ -1,0 +1,74 @@
+\documentclass[a4paper,11pt]{article}
+\begin{document}
+
+\title{SmartCab}
+\author{Ryosuke Honda}
+\date{2016/06/23}
+
+\maketitle
+
+\section{Implement a basic driving agent}
+Implement the basic driving agent, which processes the following inputs at each time step:
+\begin{itemize}
+\item Next waypoint location, relative to its current location and heading.
+\item Intersection state(traffic light and presence of cars) and
+\item Current deadline value(time steps remining)
+\end{itemize}
+And produces some random move/action [None,'forward','left','right']
+\section{Identify and update state}
+
+\section{Implement Q-learning}
+One of the most important breakthroughs in reinforcement learning was the development of Q-learning.Its simplest form,one step Q-learning, is defined by
+
+\begin{equation}
+	Q(s,a)\leftarrow (1-\alpha)Q(s,a)+\alpha(r(s,a)+\gamma \max_{a'}(Q'(s',a')))
+\end{equation}
+$\alpha$:Learning rate　\\
+$\gamma$:Discount rate \\
+{\bf s} stands for state, {\bf a} stands for action, {\bf s'} stands for the next state, {\bf a'} stands for the all actions
+
+
+First, set the parameters($\alpha$,$\gamma$) and environmental reward.Then Initialize the Q table to zero. For each episode, select a random initial state and do the following things until the agent has reached the goal.
+\begin{itemize}
+\item Select one among all possible actions for the current state.
+\item Using this possible action, consider going to the next state.
+\item Get maximum Q value for this next state based on all possible actions
+\item Compute Q value
+\item Set the next state as the current state
+\end{itemize}
+
+
+The Gamma and Alpha parameters has a range of 0 to 1. If Gamma is closer to zero, the agent will tend to consider only immediate rewards. If Alpha is closer to zero, the agent will tend to consider only past experience(don't learn).
+
+The reward and penalty for this task is as follows.
+
+\section{Enhance the driving agent}
+
+Report what changes you make to your basic implementation of Q-learning to achieve the final version of the agent.How well does it perform?
+
+When the agent just started, it has no q-value since the q-table is set to be 0. Therefore, at first I need to set the move randomly($\epsilon$-greedy).
+With the probability of $\epsilon$, the agent moves randomly. This prevents the agent from falling into the wrong choice. 
+
+
+First, I implemented random action.The agent just moves random action("None","Forward","Left","Right") and doesn't learn anything from experience.
+\\
+In the agent.py file, I set $\epsilon$ to be 1(The agents moves randomly).
+I define "Success Rate" to see the agent's performance.
+
+[Success Rate]=[No.trials achieve goal before deadline]/[No. trials]
+For these trials, the number of trials are 100.
+
+
+Second, I implemented in the following conditions.
+
+
+Alpha and Gamma in this trial is constant.
+The result in this trial is following.
+\\
+
+Third, I implemented in the following conditions.
+\\
+
+
+
+\end{document}
