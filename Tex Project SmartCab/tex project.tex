@@ -234,5 +234,13 @@ With this condition, the success rate is 0.86 which is the same value as the tri
 The Fig.\ref{fig:four} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2580.5.
 The cumulative sum of total reward of all episodes are conspicuously higher than the other trials. 
 
+\section{Discussion}
+\ \ \ \ In the previous section, I introduced 4 models.The random walk model(I) is the case which doesn't implement the q-learning.
+Second, I made the constant $\alpha$ and $\gamma$ value models. This model improves the success rate compared to the first model.
+Third model which changes $\alpha$ and $\gamma$  depending on time. As time goes by, those values are decreasing. In this model, the success rate has improved compared to the second model. However, the cumulative sum of the total reward has decreased. This means that the second model doesn't reach the destination with minimum movement but the agent continues to get the positive reward.
+The final model has constant $\gamma$ value and time-dependent $\alpha$ value. This experiment shows the high success rate and also shows high cumulative sum of total reward. 
+
+From these experiment, the $\gamma$ value should set to high value to get better success rate and cumulative sum of total reward. 
+
 
 \end{document}
