@@ -17,7 +17,7 @@ class LearningAgent(Agent):
         #Set traffic_light and movement
         traffic_light=["red","green"]
         motion = [None, 'forward', 'left', 'right']
-        waypoint,oncoming,left=motion,motion,motion
+        waypoint,oncoming,left,right=motion,motion,motion,motion
 
         
         #Initialize q_table
@@ -27,7 +27,8 @@ class LearningAgent(Agent):
             for point in waypoint:
                 for on in oncoming:
                     for lf in left:
-                        self.q_table[(light, point, on, lf)] = {None: 0, 'forward': 0, 'left': 0, 'right': 0}
+                        for ri in right:
+                            self.q_table[(light, point, on, lf,ri)] = {None: 0, 'forward': 0, 'left': 0, 'right': 0}
 
         print self.q_table
 
@@ -61,7 +62,8 @@ class LearningAgent(Agent):
         self.state = (inputs['light'],
                       self.next_waypoint,
                       inputs['oncoming'],
-                      inputs['left'])
+                      inputs['left'],
+                      inputs['right'])
 
         print "The current state is: {}".format(self.state)
 
@@ -105,7 +107,8 @@ class LearningAgent(Agent):
         state_new = (inputs_new['light'],
                      self.planner.next_waypoint(),
                      inputs_new['oncoming'],
-                     inputs_new['left'])
+                     inputs_new['left'],
+                     inputs['right'])
         print "The new state is: {}".format(state_new)
         print "t:{}".format(t)
         print alpha,gamma
@@ -123,7 +126,7 @@ class LearningAgent(Agent):
 
 
 
-        
+
         # Set current state and action as previous state and action
         
         
