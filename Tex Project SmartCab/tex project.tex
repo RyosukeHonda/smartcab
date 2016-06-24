@@ -1,8 +1,8 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[dvipdfmx]{graphicx}
+
 \usepackage{here}
 \begin{document}
-
 \title{Smartcab}
 \author{Ryosuke Honda}
 \date{2016/06/23}
@@ -44,6 +44,20 @@ The Gamma and Alpha parameters has a range of 0 to 1. If Gamma is closer to zero
 
 The reward and penalty for this task is as follows.
 
+
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=100mm]{graph/python_code.jpg}
+\end{center}
+\caption{Python code snippet for deciding action policy}
+\label{fig:1}
+\end{figure}
+
+In this experiment, I use $\epsilon$-greedy  and set $\epsilon$ to be 0.1. The agent chooses random action with the probability of 0.1. If the maximum of q-table is 0, the agent also chooses random action. If the maximum q-table is more than 0, the agent chooses the maximum value and moves toward it.
+
+
 \section{Enhance the driving agent}
 
 Report what changes you make to your basic implementation of Q-learning to achieve the final version of the agent.How well does it perform?
@@ -66,6 +80,11 @@ In this experiment,I set the conditions as follows.
 
 
 Success rate in this trial is 0.20.
+
+
+
+
+        
 
 
 \begin{figure}[H]

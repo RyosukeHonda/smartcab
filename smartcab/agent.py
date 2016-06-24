@@ -119,6 +119,11 @@ class LearningAgent(Agent):
                   alpha * (reward + gamma * max(self.q_table[state_new].values()))
         # Update the Q_table
         self.q_table[self.state][action] = q_value
+
+
+
+
+        
         # Set current state and action as previous state and action
         
         
