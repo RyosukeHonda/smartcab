@@ -6,8 +6,11 @@
 \title{Smartcab}
 \author{Ryosuke Honda}
 \date{2016/06/23}
-
 \maketitle
+
+
+
+
 
 \section{Implement a basic driving agent}
 Implement the basic driving agent, which processes the following inputs at each time step:
@@ -17,7 +20,21 @@ Implement the basic driving agent, which processes the following inputs at each 
 \item Current deadline value(time steps remining)
 \end{itemize}
 And produces some random move/action [None,'forward','left','right']
+
+
+
+
+
+
+
+
 \section{Identify and update state}
+
+
+
+
+
+
 
 \section{Implement Q-learning}
 One of the most important breakthroughs in reinforcement learning was the development of Q-learning.Its simplest form,one step Q-learning, is defined by
@@ -57,6 +74,15 @@ The reward and penalty for this task is as follows.
 
 In this experiment, I use $\epsilon$-greedy  and set $\epsilon$ to be 0.1. The agent chooses random action with the probability of 0.1. If the maximum of q-table is 0, the agent also chooses random action. If the maximum q-table is more than 0, the agent chooses the maximum value and moves toward it.
 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=100mm]{graph/python_code2.jpg}
+\end{center}
+\caption{Python code snippet for updating Q table}
+\label{fig:2}
+\end{figure}
+The code above is the calculation of fomula(1) and code snippet for updating Q table.
 
 \section{Enhance the driving agent}
 

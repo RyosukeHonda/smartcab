@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2015.10.5)  24 JUN 2016 14:09
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2015.10.5)  24 JUN 2016 14:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -105,27 +105,26 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
 ]
 File: graph/python_code.jpg Graphic file (type bmp)
 
-<graph/python_code.jpg> [2]
+<graph/python_code.jpg>
+File: graph/python_code2.jpg Graphic file (type bmp)
+ <graph/python_code2.jpg> [2]
 File: graph/random.jpg Graphic file (type bmp)
  <graph/random.jpg>
 File: graph/constant.jpg Graphic file (type bmp)
- <graph/constant.jpg> [3]
+
+<graph/constant.jpg> [3]
 File: graph/better.jpg Graphic file (type bmp)
-
-<graph/better.jpg> [4]
+ <graph/better.jpg> [4]
 File: graph/gamma_con.jpg Graphic file (type bmp)
- <graph/gamma_con.jpg> [5] [6] (./tex project.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ <graph/gamma_con.jpg> [5]
+[6] (./tex project.aux) ) 
 Here is how much of TeX's memory you used:
- 684 strings out of 493777
- 8757 string characters out of 6151334
+ 687 strings out of 493777
+ 8802 string characters out of 6151334
  68639 words of memory out of 5000000
- 4208 multiletter control sequences out of 15000+600000
+ 4210 multiletter control sequences out of 15000+600000
  14703 words of font info for 57 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  25i,6n,21p,317b,308s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on "tex project.dvi" (6 pages, 7444 bytes).
+Output written on "tex project.dvi" (6 pages, 7724 bytes).
