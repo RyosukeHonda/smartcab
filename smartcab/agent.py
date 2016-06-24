@@ -167,7 +167,7 @@ class LearningAgent(Agent):
           #  print df
             #df.to_csv('better.csv')
            # df.to_csv('random.csv')
-            df.to_csv('constant111.csv')
+            df.to_csv('constant.csv')
            # df.to_csv('gamma_con.csv')
           #  return df1
        
