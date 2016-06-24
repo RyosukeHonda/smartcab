@@ -95,10 +95,10 @@ class LearningAgent(Agent):
         
         # TODO: Learn policy based on state, action, reward
         # Set the tuning parameters
-        alpha = 1.0/(1.0+t) # learning rate
-        gamma = 1.0/(1.0+deadline) # discount factor
-        #alpha=0.5
-        #gamma=0.2
+        #alpha = 1.0/(1.0+t) # learning rate
+        #gamma = 1.0/(1.0+deadline) # discount factor
+        alpha=0.5
+        gamma=0.9
         # Get the new state after the above action
 
         inputs_new = self.env.sense(self)
@@ -157,9 +157,10 @@ class LearningAgent(Agent):
             df=pd.DataFrame(self.preserve,columns=['Time','Reward','Deadline','Episode'])
           #  print self.preserve
           #  print df
-            df.to_csv('better.csv')
+            #df.to_csv('better.csv')
            # df.to_csv('random.csv')
-            #df.to_csv('constant.csv')
+            df.to_csv('constant.csv')
+           # df.to_csv('gamma_con.csv')
           #  return df1
        
         

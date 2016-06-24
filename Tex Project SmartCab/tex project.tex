@@ -1,7 +1,9 @@
 \documentclass[a4paper,11pt]{article}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{here}
 \begin{document}
 
-\title{SmartCab}
+\title{Smartcab}
 \author{Ryosuke Honda}
 \date{2016/06/23}
 
@@ -45,30 +47,91 @@ The reward and penalty for this task is as follows.
 \section{Enhance the driving agent}
 
 Report what changes you make to your basic implementation of Q-learning to achieve the final version of the agent.How well does it perform?
-
+\\
 When the agent just started, it has no q-value since the q-table is set to be 0. Therefore, at first I need to set the move randomly($\epsilon$-greedy).
 With the probability of $\epsilon$, the agent moves randomly. This prevents the agent from falling into the wrong choice. 
 
 
+
+%%Explanation for the First implementation
 First, I implemented random action.The agent just moves random action("None","Forward","Left","Right") and doesn't learn anything from experience.
 \\
 In the agent.py file, I set $\epsilon$ to be 1(The agents moves randomly).
 I define "Success Rate" to see the agent's performance.
 
 [Success Rate]=[No.trials achieve goal before deadline]/[No. trials]
-For these trials, the number of trials are 100.
+\\For these trials, the number of trials are 100.
+
+In this experiment,I set the conditions as follows.
 
 
-Second, I implemented in the following conditions.
+Success rate in this trial is 0.20.
 
 
-Alpha and Gamma in this trial is constant.
-The result in this trial is following.
-\\
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=100mm]{graph/random.jpg}
+\end{center}
+\caption{Random Action}
+\label{fig:one}
+\end{figure}
 
-Third, I implemented in the following conditions.
-\\
+As the Fig\ref{fig:one} shows,the total rewards with this trial contains negative values.
+Without learning from their experience, the agent won't get high reward.
 
 
+%%Explanation for the Second Implementation
+
+Second, the parameters of $\alpha$ and $\gamma$ are 0.5 and 0.9 respectively.
+With this condition, the success rate is 0.72 which is higher than the random action.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=100mm]{graph/constant.jpg}
+\end{center}
+\caption{Constant $\alpha$ and $\gamma$}
+\label{fig:two}
+\end{figure}
+
+The Fig\ref{fig:two} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2195.5.
+
+
+
+
+%%Explanation for the Third Implementation
+Third, the parameters of $\alpha$ and $\gamma$ are as follows.
+
+\begin{equation}
+	\alpha=\frac{1.0}{1.0+time}
+\end{equation}
+
+\begin{equation}
+	\gamma=\frac{1.0}{1.0+deadline}
+\end{equation}
+
+With this condition, the success rate is 0.86 which is higher than the trials before and the cumulative sum of total reward of all episodes are 2099.0
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=100mm]{graph/better.jpg}
+\end{center}
+\caption{Fig}
+\label{fig:three}
+\end{figure}
+
+The condition in this agent is
+
+
+%%Explanation for the Final Implementation
+Final version
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=100mm]{graph/gamma_con.jpg}
+\end{center}
+\caption{Fig}
+\label{fig:three}
+\end{figure}
 
 \end{document}
