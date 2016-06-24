@@ -109,7 +109,7 @@ Third, the parameters of $\alpha$ and $\gamma$ are as follows.
 	\gamma=\frac{1.0}{1.0+deadline}
 \end{equation}
 
-With this condition, the success rate is 0.86 which is higher than the trials before and the cumulative sum of total reward of all episodes are 2099.0
+With this condition, the success rate is 0.86 which is higher than the trials before.
 
 
 \begin{figure}[H]
@@ -120,18 +120,27 @@ With this condition, the success rate is 0.86 which is higher than the trials be
 \label{fig:three}
 \end{figure}
 
-The condition in this agent is
+The Fig\ref{fig:three} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2099.0
 
 
 %%Explanation for the Final Implementation
 Final version
+
+The condition in this implementation is as follows.
+$\alpha$ is equal to the fomula (2) and $\gamma$ sets to be 0.9.
+
+With this condition, the success rate is 0.86 which is the same value as the trial 3.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=100mm]{graph/gamma_con.jpg}
 \end{center}
 \caption{Fig}
-\label{fig:three}
+\label{fig:four}
 \end{figure}
+
+The Fig\ref{fig:four} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2580.5.
+The cumulative sum of total reward of all episodes are conspicuously higher than the other trials. 
+
 
 \end{document}
