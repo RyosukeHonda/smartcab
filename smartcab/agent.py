@@ -167,7 +167,7 @@ class LearningAgent(Agent):
           #  print df
             #df.to_csv('better.csv')
            # df.to_csv('random.csv')
-            df.to_csv('constant.csv')
+            df.to_csv('constant111.csv')
            # df.to_csv('gamma_con.csv')
           #  return df1
        
@@ -180,7 +180,7 @@ def run():
     a = e.create_agent(LearningAgent)  # create agent
     e.set_primary_agent(a, enforce_deadline=True)  # set agent to track
     # Now simulate it
-    sim = Simulator(e, update_delay=0.001,display=True)  # reduce update_delay to speed up simulation
+    sim = Simulator(e, update_delay=1,display=True)  # reduce update_delay to speed up simulation
     sim.run(n_trials=100)  # press Esc or close pygame window to quit
 
 

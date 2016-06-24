@@ -22,6 +22,17 @@ Implement the basic driving agent, which processes the following inputs at each 
 And produces some random move/action [None,'forward','left','right']
 
 
+The rule and the reward of the agent are following.
+\begin{itemize}
+\item The start and goal location changes in each episodes.
+\item When the car violates the traffic rule, the agent will get the negative reward(-1).
+\item If the car moves without violating the traffic rule but the agent doesn't follow the waypoint,the agent will lose 0.5 points.
+\item When the car moves without violating the traffic rule and follows the waypoint, the agent will get 2 reward points
+\item When the car gets to the destination within the deadline, the agent will get 10 reward points.
+\item When reaching goal within the deadline, the agent will always get 10 reward points, which means that reaching the destination doesn't always get the maximum reward for each episode.
+ 
+\end{itemize}
+
 
 
 
@@ -31,7 +42,42 @@ And produces some random move/action [None,'forward','left','right']
 \section{Identify and update state}
 
 
+The agent can sense the information of inputs of traffic light, oncoming car, turning right and turning left which all of other agents have and what's more the agent has the information of next waypoint.
 
+Since the start point and destination point will differ from each episode, it's not good to keep track of their points to get high rewards.
+We should restore the information that keeps the same as the episode changes. Therefore, we should keep track of the traffic information which is traffic light, oncoming car,right and left. Those are the information which can sense the other agents can sense. The agent should keep the memory of waypoint. These information is necessary not to violate the traffic rules and to get high rewards.
+
+As explained above, the Q table for this questions will be like this.
+
+\begin{table}[H]
+\begin{center}
+\caption{Q table}
+\begin{tabular}{|c|c|c|} \hline
+Information & Action & Dimention  \\ \hline
+Traffic light & Red &2 \\ 
+ & Blue & \\ \hline
+ & None & \\
+Waypoint &Forward &4\\
+ &Left &\\
+ & Right &\\ \hline
+ & None & \\
+ Oncoming&Forward &4\\
+ &Left &\\
+ & Right &\\ \hline
+ & None & \\
+ Left&Forward &4\\
+ &Left &\\
+ & Right &\\ \hline
+ & None & \\
+Right &Forward &4\\
+ &Left &\\
+ & Right &\\ \hline
+
+\end{tabular}
+\end{center}
+\end{table}
+
+The dimension of the q table is 2$\times$4$\times$4$\times$4$\times$4=512.
 
 
 
