@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2015.10.5)  24 JUN 2016 22:29
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.euc) (TeX Live 2015) (preloaded format=platex 2015.10.5)  28 JUN 2016 13:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -101,35 +101,36 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 54.
  [2]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 92.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 96.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 92.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 96.
 File: graph/python_code.jpg Graphic file (type bmp)
 
-<graph/python_code.jpg>
+<graph/python_code.jpg> [3]
 File: graph/python_code2.jpg Graphic file (type bmp)
- <graph/python_code2.jpg> [3]
-Overfull \hbox (1.47122pt too wide) in paragraph at lines 149--150
-[]\OT1/cmr/bx/n/10.95 "Success Rate"="No.trials achieve goal be-fore dead-line"
- $\OMS/cmsy/m/n/10.95 ^^D$\OT1/cmr/bx/n/10.95 "No.
+ <graph/python_code2.jpg>
+Overfull \hbox (5.49379pt too wide) in paragraph at lines 153--154
+[]\OT1/cmr/bx/n/10.95 "Success Ra-tio"="No.trials achieve goal be-fore dead-lin
+e" $\OMS/cmsy/m/n/10.95 ^^D$\OT1/cmr/bx/n/10.95 "No.
  []
 
+[4]
 File: graph/random.jpg Graphic file (type bmp)
-<graph/random.jpg> [4]
+ <graph/random.jpg>
 File: graph/constant.jpg Graphic file (type bmp)
  <graph/constant.jpg> [5]
 File: graph/better.jpg Graphic file (type bmp)
- <graph/better.jpg>
+ <graph/better.jpg> [6]
 File: graph/gamma_con.jpg Graphic file (type bmp)
 
-<graph/gamma_con.jpg> [6] [7] (./tex project.aux) ) 
+<graph/gamma_con.jpg> [7] [8] [9] (./tex project.aux) ) 
 Here is how much of TeX's memory you used:
  690 strings out of 493777
  8831 string characters out of 6151334
- 70639 words of memory out of 5000000
+ 71639 words of memory out of 5000000
  4213 multiletter control sequences out of 15000+600000
  14703 words of font info for 57 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 25i,7n,21p,404b,308s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 25i,7n,21p,544b,308s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on "tex project.dvi" (7 pages, 13332 bytes).
+Output written on "tex project.dvi" (9 pages, 16828 bytes).
