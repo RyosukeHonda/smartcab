@@ -79,7 +79,11 @@ Right &Forward &4\\
 The possible action for the agent is "None","Forward","Right","Left"
 The dimension of the q table is 2$\times$4$\times$4$\times$4$\times$4=512.
 
+Putting the right into the q table is a must. It seems that turning right while the signal is red is violating the traffic rules on the surface but that's not true.
+American traffic rules allow us to turn right while the signal is red.Therefore, the state should be kept in the q table. In this game, the rule is followed by the American traffic rule and the reward is also consistent with it(meaning not turning right while the traffic right is red will get penalty to the agent.).
 
+
+I don't include the deadline into q table because of the curse of dimensionality. Deadline is defined by 5 multiplying by the distance(the distance between the starting point and the destination). The distance are more than 4, that means the deadline will be at least 25 and more. If the deadline is 25 which is the minimum value, the dimension will be $512 \times 25 = 12,800$. This dimensionality is still very high even though the deadline is the minimum value.Therefore, putting the deadline into the q table isn't feasible.
 
 
 \section{Implement Q-learning}
@@ -113,7 +117,7 @@ Here, I introduce the code snippet of the $\epsilon$-greedy Q learning.
 \label{fig:1}
 \end{figure}
 
-In this experiment, I use $\epsilon$-greedy  and set $\epsilon$ to be 0.1. The agent chooses random action with the probability of 0.1. If the maximum of q-table is 0, the agent also chooses random action. If the maximum q-table is more than 0, the agent chooses the maximum value and moves toward it.
+In this experiment, I use $\epsilon$-greedy  and set $\epsilon$ to be 0.1. The agent chooses random action with the probability of 0.1. If the maximum of q table is 0, the agent also chooses random action. If the maximum q-table is more than 0, the agent chooses the maximum value and moves toward it.
 
 
 \begin{figure}[H]
@@ -143,19 +147,20 @@ With the probability of $\epsilon$, the agent moves randomly. This prevents the 
 (I) First, I implemented random action.The agent just moves random action("None","Forward","Left","Right") and doesn't learn anything from experience.
 \\
 In the agent.py file, I set $\epsilon$ to be 1(The agents moves randomly).
-I define "Success Rate" to see the agent's performance.
+I define "Success Ratio" and "Penalty Ratio"to see the agent's performance.
 
 
-{\bf "Success Rate"="No.trials achieve goal before deadline" $\div$"No. trials"}
+{\bf "Success Ratio"="No.trials achieve goal before deadline" $\div$"No. trials"}\\
 
-
+{\bf "Penalty Ratio"="No. penalty actions" $\div$ "No. actions"}\\
 
 For these trials, the number of trials are 100.
 In this experiment,I set the conditions as follows.
 
 
-Success rate in this trial is 0.20.
-
+Success ratio in this trial is 0.20 and the penalty ration is 0.575.
+The cumulative sum of negative reward is -1185.0, and the cumulative sum of total reward was 3.5.
+The total number of action from the first episode to the end of the episode is 2814.
 
 
         
@@ -176,7 +181,7 @@ Without learning from their experience, the agent won't get high reward.
 %%Explanation for the Second Implementation
 
 (I\hspace{-.1em}I) Second, the parameters of $\alpha$ and $\gamma$ are 0.5 and 0.9 respectively.
-With this condition, the success rate is 0.72 which is higher than the random action.
+With this condition, the success rate is 0.72 which is higher than the random action. The penalty ratio in this trial is 0.359 which is much smaller than the random action. 
 
 \begin{figure}[H]
 \begin{center}
@@ -187,6 +192,7 @@ With this condition, the success rate is 0.72 which is higher than the random ac
 \end{figure}
 
 The Fig.\ref{fig:two} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2195.5.
+The cumulative sum of the negative reward is -389.5 and the total number of action is 1889 which is shorter than the first trial, meaning the agent reaches to the goal by shorter roots.
 \\
 
 
@@ -201,7 +207,7 @@ The Fig.\ref{fig:two} shows,the total rewards for each episode are all positive 
 	\gamma=\frac{1.0}{1.0+deadline}
 \end{equation}
 
-With this condition, the success rate is 0.86 which is higher than the trials before.
+With this condition, the success rate is 0.86 which is higher than the trials before.The penalty ration in this trial is 0.325 which is smaller than the trials before.
 
 
 \begin{figure}[H]
@@ -212,7 +218,7 @@ With this condition, the success rate is 0.86 which is higher than the trials be
 \label{fig:three}
 \end{figure}
 
-The Fig.\ref{fig:three} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2099.0
+The Fig.\ref{fig:three} shows the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2099.0.The cumulative sum of total penalty in this trial is -437.5 which is higher than the trial before. The number of total actions is 1688 which is the shortest steps from the beginning to the end.The agent takes the shorter way to the goal with containing more negative reward actions.
 \\
 
 %%Explanation for the Final Implementation
@@ -221,7 +227,7 @@ The Fig.\ref{fig:three} shows,the total rewards for each episode are all positiv
 The condition in this implementation is as follows.
 $\alpha$ is equal to the fomula (2) and $\gamma$ sets to be 0.9.
 
-With this condition, the success rate is 0.86 which is the same value as the trial 3.
+With this condition, the success rate is 0.86 which is the same value as the trial 3. However, the penalty ration in this trial is 0.300 which is the smallest of all trials above.
 
 \begin{figure}[H]
 \begin{center}
@@ -232,13 +238,14 @@ With this condition, the success rate is 0.86 which is the same value as the tri
 \end{figure}
 
 The Fig.\ref{fig:four} shows,the total rewards for each episode are all positive and the cumulative sum of total reward of all episodes are 2580.5.
-The cumulative sum of total reward of all episodes are conspicuously higher than the other trials. 
+The cumulative sum of total reward of all episodes are conspicuously higher than the other trials. The cumulative sum of total penalty in this trial is -283.0 which is the smallest value of all trials and the total number of actions in this trail is 1670 which is also smallest number.
 
 \section{Discussion}
 \ \ \ \ In the previous section, I introduced 4 models.The random walk model(I) is the case which doesn't implement the q-learning.
-Second, I made the constant $\alpha$ and $\gamma$ value models. This model improves the success rate compared to the first model.
-Third model which changes $\alpha$ and $\gamma$  depending on time. As time goes by, those values are decreasing. In this model, the success rate has improved compared to the second model. However, the cumulative sum of the total reward has decreased. This means that the second model doesn't reach the destination with minimum movement but the agent continues to get the positive reward.
-The final model has constant $\gamma$ value and time-dependent $\alpha$ value. This experiment shows the high success rate and also shows high cumulative sum of total reward. 
+Second, I made the constant $\alpha$ and $\gamma$ value models. This model improves the success rate and penalty ratio compared to the first model and. 
+Third model which changes $\alpha$ and $\gamma$  depending on time. As time goes by, those values are decreasing. In this model, the success rate and penalty ratio has improved compared to the second model. However, the cumulative sum of the total reward has decreased. This means that the second model takes longer way to get to the destination to get positive reward. The third one takes shorter way to get to the destination with getting negative reward.
+The final model has constant $\gamma$ value and time-dependent $\alpha$ value. This experiment shows the high success rate and also shows high cumulative sum of total reward. The penalty ratio in this trail is the smallest of all. What's more, the actions from the beginning to the end is the shortest.
+This means this agent tries to reach the goal with shorter way avoiding the negative rewards.
 
 From these experiment, the $\gamma$ value should set to high value to get better success rate and cumulative sum of total reward. 
 

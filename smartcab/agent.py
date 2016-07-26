@@ -92,12 +92,19 @@ class LearningAgent(Agent):
 
         # TODO: Learn policy based on state, action, reward
         # Set the tuning parameters
+<<<<<<< HEAD
 
 
         #alpha = 1.0/(1.0+t) # learning rate
         #gamma = 1.0/(1.0+deadline) # discount factor
         alpha=0.5 #learning rate(constant version)
         gamma=0.9 #discount factor(constant version)
+=======
+        alpha = 1.0/(1.0+t) # learning rate
+        gamma = 1.0/(1.0+deadline) # discount factor
+        #alpha=0.5
+        #gamma=0.9
+>>>>>>> origin/master
         # Get the new state after the above action
 
         inputs_new = self.env.sense(self)
@@ -131,6 +138,18 @@ class LearningAgent(Agent):
         if old_time==0:
             self.episode+=1
 
+<<<<<<< HEAD
+=======
+        self.preserve.append([new_time,self.total_reward,reward,deadline,self.episode])
+      #  self.preserve.append(new_time)
+      #  self.preserve.append(self.total_reward)
+      #  self.preserve.append(self.episode)
+    
+    
+    
+    
+    
+>>>>>>> origin/master
 
         self.preserve.append([new_time,self.total_reward,deadline,self.episode])
 
@@ -143,13 +162,13 @@ class LearningAgent(Agent):
 
         #Preserve all episodes information
         if self.episode==100:
-            df=pd.DataFrame(self.preserve,columns=['Time','Reward','Deadline','Episode'])
+            df=pd.DataFrame(self.preserve,columns=['Time','Total_Reward','Reward','Deadline','Episode'])
           #  print self.preserve
           #  print df
-            #df.to_csv('better.csv')
-           # df.to_csv('random.csv')
-            df.to_csv('constant.csv')
-           # df.to_csv('gamma_con.csv')
+            df.to_csv('better.csv')
+            #df.to_csv('random.csv')
+            #df.to_csv('constant.csv')
+            #df.to_csv('gamma_con.csv')
           #  return df1
 
 def run():
@@ -159,7 +178,7 @@ def run():
     a = e.create_agent(LearningAgent)  # create agent
     e.set_primary_agent(a, enforce_deadline=True)  # set agent to track
     # Now simulate it
-    sim = Simulator(e, update_delay=1,display=True)  # reduce update_delay to speed up simulation
+    sim = Simulator(e, update_delay=0.001,display=True)  # reduce update_delay to speed up simulation
     sim.run(n_trials=100)  # press Esc or close pygame window to quit
 
 if __name__ == '__main__':
